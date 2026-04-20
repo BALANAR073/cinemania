@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cinemania - Добавить фильм</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__container">
+            <div class="header__logo">
+                <a href="/">
+                    <img src="/img/cinema-icon.png" alt="Cinemania Logo" class="header__logo-img">
+                    <span class="header__logo-text">CINEMANIA</span>
+                </a>
+            </div>
+            
+            <nav class="header__nav">
+                <ul class="header__menu">
+                    <li><a href="/" class="header__link">Главная</a></li>
+                    <li><a href="/add-entity.html" class="header__link header__link--active">Добавить фильм</a></li>
+                    <li><a href="#" class="header__link" id="popularLink">Популярное</a></li>
+                    <li><a href="#" class="header__link" id="aboutLink">О нас</a></li>
+                </ul>
+            </nav>
+
+            <button class="header__mobile-menu" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main main--add-entity">
+        <div class="container container--small">
+            <h1 class="page-title">Добавить новый фильм</h1>
+            
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="loading__spinner"></div>
+                <p class="loading__text">Отправка данных...</p>
+            </div>
+
+            <!-- Form -->
+            <form id="addFilmForm" class="form">
+                <div class="form__group">
+                    <label for="title" class="form__label">Название фильма *</label>
+                    <input 
+                        type="text" 
+                        id="title" 
+                        name="title" 
+                        class="form__input" 
+                        required
+                        placeholder="Введите название фильма"
+                    >
+                </div>
+
+                <div class="form__group">
+                    <label for="overview" class="form__label">Описание *</label>
+                    <textarea 
+                        id="overview" 
+                        name="overview" 
+                        class="form__textarea" 
+                        rows="5"
+                        required
+                        placeholder="Введите описание фильма"
+                    ></textarea>
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="releaseDate" class="form__label">Дата выхода *</label>
+                        <input 
+                            type="date" 
+                            id="releaseDate" 
+                            name="releaseDate" 
+                            class="form__input" 
+                            required
+                            max="2026-12-31"
+                        >
+                    </div>
+
+                    <div class="form__group">
+                        <label for="runtime" class="form__label">Продолжительность (мин) *</label>
+                        <input 
+                            type="number" 
+                            id="runtime" 
+                            name="runtime" 
+                            class="form__input" 
+                            min="1"
+                            max="500"
+                            required
+                            placeholder="Например: 120"
+                        >
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <label for="genre" class="form__label">Жанры *</label>
+                    <input 
+                        type="text" 
+                        id="genre" 
+                        name="genre" 
+                        class="form__input" 
+                        required
+                        placeholder="Боевик, Драма, Комедия"
+                    >
+                    <small class="form__hint">Укажите жанры через запятую</small>
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="director" class="form__label">Режиссер *</label>
+                        <input 
+                            type="text" 
+                            id="director" 
+                            name="director" 
+                            class="form__input" 
+                            required
+                            placeholder="Имя режиссера"
+                        >
+                    </div>
+
+                    <div class="form__group">
+                        <label for="cast" class="form__label">Актеры *</label>
+                        <input 
+                            type="text" 
+                            id="cast" 
+                            name="cast" 
+                            class="form__input" 
+                            required
+                            placeholder="Имена актеров через запятую"
+                        >
+                    </div>
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="country" class="form__label">Страна *</label>
+                        <input 
+                            type="text" 
+                            id="country" 
+                            name="country" 
+                            class="form__input" 
+                            required
+                            placeholder="Например: США"
+                        >
+                    </div>
+
+                    <div class="form__group">
+                        <label for="language" class="form__label">Язык *</label>
+                        <input 
+                            type="text" 
+                            id="language" 
+                            name="language" 
+                            class="form__input" 
+                            required
+                            placeholder="Например: Английский"
+                        >
+                    </div>
+                </div>
+
+                <div class="form__group">
+                    <label for="posterUrl" class="form__label">URL постера</label>
+                    <input 
+                        type="url" 
+                        id="posterUrl" 
+                        name="posterUrl" 
+                        class="form__input" 
+                        placeholder="https://example.com/poster.jpg"
+                    >
+                </div>
+
+                <div class="form__row">
+                    <div class="form__group">
+                        <label for="rating" class="form__label">Рейтинг (0-10)</label>
+                        <input 
+                            type="number" 
+                            id="rating" 
+                            name="rating" 
+                            class="form__input" 
+                            min="0"
+                            max="10"
+                            step="0.1"
+                            placeholder="7.5"
+                        >
+                    </div>
+
+                    <div class="form__group">
+                        <label for="budget" class="form__label">Бюджет ($)</label>
+                        <input 
+                            type="number" 
+                            id="budget" 
+                            name="budget" 
+                            class="form__input" 
+                            min="0"
+                            placeholder="1000000"
+                        >
+                    </div>
+                </div>
+
+                <div class="form__actions">
+                    <button type="submit" class="btn btn--primary">Добавить фильм</button>
+                    <button type="reset" class="btn btn--secondary">Очистить</button>
+                </div>
+            </form>
+
+            <!-- Success Modal -->
+            <div id="successModal" class="modal" style="display: none;">
+                <div class="modal__content">
+                    <div class="modal__header">
+                        <h2 class="modal__title">Успешно!</h2>
+                        <button class="modal__close" aria-label="Закрыть">&times;</button>
+                    </div>
+                    <div class="modal__body">
+                        <img src="/img/success-icon.png" alt="Success" class="modal__icon">
+                        <p id="successMessage" class="modal__message">Фильм успешно добавлен!</p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--primary modal__ok">OK</button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Error Modal -->
+            <div id="errorModal" class="modal" style="display: none;">
+                <div class="modal__content">
+                    <div class="modal__header">
+                        <h2 class="modal__title modal__title--error">Ошибка</h2>
+                        <button class="modal__close" aria-label="Закрыть">&times;</button>
+                    </div>
+                    <div class="modal__body">
+                        <p id="errorModalMessage" class="modal__message"></p>
+                    </div>
+                    <div class="modal__footer">
+                        <button class="btn btn--secondary modal__ok">OK</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__section">
+                <h3 class="footer__title">CINEMANIA</h3>
+                <p class="footer__text">Ваш проводник в мире кино. Мы собираем лучшие фильмы со всего мира.</p>
+            </div>
+            
+            <div class="footer__section">
+                <h4 class="footer__subtitle">Навигация</h4>
+                <ul class="footer__links">
+                    <li><a href="/" class="footer__link">Главная</a></li>
+                    <li><a href="/add-entity.html" class="footer__link">Добавить фильм</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer__bottom">
+            <div class="container">
+                <p class="footer__copyright">© 2024 Cinemania. Все права защищены.</p>
+                <p class="footer__disclaimer">Данные предоставлены TMDB API</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal" style="display: none;">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">О нас</h2>
+                <button class="modal__close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal__body">
+                <img src="/img/cinema-icon.png" alt="Cinemania" class="modal__icon">
+                <h3>CINEMANIA</h3>
+                <p class="modal__message">
+                    Ваш проводник в мире кино.<br><br>
+                    Мы собираем лучшие фильмы со всего мира и предоставляем актуальную информацию о новинках и классике кинематографа.<br><br>
+                    Версия: 1.0.0<br>
+                    Данные предоставлены TMDB API
+                </p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--primary modal__ok">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/scripts/add-entity.ts"></script>
+</body>
+</html>

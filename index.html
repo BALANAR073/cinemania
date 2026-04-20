@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Cinemania - Ваш гид в мире кино">
+    <title>Cinemania - Каталог фильмов</title>
+    <link rel="stylesheet" href="/src/styles/main.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container header__container">
+            <div class="header__logo">
+                <a href="/">
+                    <img src="/img/cinema-icon.png" alt="Cinemania Logo" class="header__logo-img">
+                    <span class="header__logo-text">CINEMANIA</span>
+                </a>
+            </div>
+            
+            <nav class="header__nav">
+                <ul class="header__menu">
+                    <li><a href="/" class="header__link header__link--active">Главная</a></li>
+                    <li><a href="/add-entity.html" class="header__link">Добавить фильм</a></li>
+                    <li><a href="#" class="header__link" id="popularLink">Популярное</a></li>
+                    <li><a href="#" class="header__link" id="aboutLink">О нас</a></li>
+                </ul>
+            </nav>
+
+            <button class="header__mobile-menu" aria-label="Меню">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero__overlay"></div>
+        <div class="container hero__container">
+            <h1 class="hero__title">Добро пожаловать в мир кино</h1>
+            <p class="hero__subtitle">Откройте для себя тысячи фильмов, от классики до новинок</p>
+            
+            <!-- Search Bar -->
+            <div class="search">
+                <input 
+                    type="text" 
+                    id="searchInput" 
+                    class="search__input" 
+                    placeholder="Поиск фильмов..."
+                    aria-label="Поиск фильмов"
+                >
+                <button id="searchButton" class="search__button" aria-label="Найти">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M9 17A8 8 0 1 0 9 1a8 8 0 0 0 0 16zM19 19l-4.35-4.35" 
+                              stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Controls Panel -->
+            <div class="controls">
+                <div class="controls__sort">
+                    <label for="sortSelect" class="controls__label">Сортировка:</label>
+                    <select id="sortSelect" class="controls__select" aria-label="Сортировка фильмов">
+                        <option value="popularity.desc">По популярности ↓</option>
+                        <option value="popularity.asc">По популярности ↑</option>
+                        <option value="vote_average.desc">По рейтингу ↓</option>
+                        <option value="vote_average.asc">По рейтингу ↑</option>
+                        <option value="release_date.desc">По дате выхода ↓</option>
+                        <option value="release_date.asc">По дате выхода ↑</option>
+                        <option value="title.asc">По названию (А-Я)</option>
+                        <option value="title.desc">По названию (Я-А)</option>
+                    </select>
+                </div>
+
+                <div class="controls__limit">
+                    <label for="limitSelect" class="controls__label">Показывать:</label>
+                    <select id="limitSelect" class="controls__select" aria-label="Количество фильмов на странице">
+                        <option value="5">5 фильмов</option>
+                        <option value="10" selected>10 фильмов</option>
+                        <option value="15">15 фильмов</option>
+                        <option value="20">20 фильмов</option>
+                    </select>
+                </div>
+                
+                <button id="refreshButton" class="btn btn--secondary controls__refresh">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor">
+                        <path d="M13.5 8c0 3-2.5 5.5-5.5 5.5S2.5 11 2.5 8 5 2.5 8 2.5c1.5 0 2.9.6 3.9 1.6L10 6h4V2l-1.5 1.5C11.1 2.1 9.7 1.5 8 1.5 4.4 1.5 1.5 4.4 1.5 8s2.9 6.5 6.5 6.5 6.5-2.9 6.5-6.5h-1z"/>
+                    </svg>
+                    Обновить
+                </button>
+            </div>
+
+            <!-- Loading Indicator -->
+            <div id="loadingIndicator" class="loading" style="display: none;">
+                <div class="loading__spinner"></div>
+                <p class="loading__text">Загрузка фильмов...</p>
+            </div>
+
+            <!-- Error Message -->
+            <div id="errorMessage" class="error-message" style="display: none;"></div>
+
+            <!-- Films Grid -->
+            <div id="filmsGrid" class="films-grid"></div>
+
+            <!-- Empty State -->
+            <div id="emptyState" class="empty-state" style="display: none;">
+                <img src="/img/film-strip.png" alt="No films" class="empty-state__image">
+                <h3 class="empty-state__title">Фильмы не найдены</h3>
+                <p class="empty-state__text">Попробуйте изменить параметры поиска</p>
+            </div>
+
+            <!-- Pagination -->
+            <div id="pagination" class="pagination"></div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container footer__container">
+            <div class="footer__section">
+                <h3 class="footer__title">CINEMANIA</h3>
+                <p class="footer__text">Ваш проводник в мире кино. Мы собираем лучшие фильмы со всего мира.</p>
+            </div>
+            
+            <div class="footer__section">
+                <h4 class="footer__subtitle">Навигация</h4>
+                <ul class="footer__links">
+                    <li><a href="/" class="footer__link">Главная</a></li>
+                    <li><a href="/add-entity.html" class="footer__link">Добавить фильм</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer__section">
+                <h4 class="footer__subtitle">Контакты</h4>
+                <ul class="footer__links">
+                    <li><a href="mailto:info@cinemania.ru" class="footer__link">info@cinemania.ru</a></li>
+                    <li><a href="tel:+74951234567" class="footer__link">+7 (495) 123-45-67</a></li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="footer__bottom">
+            <div class="container">
+                <p class="footer__copyright">© 2024 Cinemania. Все права защищены.</p>
+                <p class="footer__disclaimer">Данные предоставлены TMDB API</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- About Modal -->
+    <div id="aboutModal" class="modal" style="display: none;">
+        <div class="modal__content">
+            <div class="modal__header">
+                <h2 class="modal__title">О нас</h2>
+                <button class="modal__close" aria-label="Закрыть">&times;</button>
+            </div>
+            <div class="modal__body">
+                <img src="/img/cinema-icon.png" alt="Cinemania" class="modal__icon">
+                <h3>CINEMANIA</h3>
+                <p class="modal__message">
+                    Ваш проводник в мире кино.<br><br>
+                    Мы собираем лучшие фильмы со всего мира и предоставляем актуальную информацию о новинках и классике кинематографа.<br><br>
+                    Версия: 1.0.0<br>
+                    Данные предоставлены TMDB API
+                </p>
+            </div>
+            <div class="modal__footer">
+                <button class="btn btn--primary modal__ok">Понятно</button>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="/src/scripts/main.ts"></script>
+</body>
+</html>

@@ -1,0 +1,101 @@
+/* Темы и переменные */
+:root {
+  /* Основные цвета */
+  --accent-color: #667eea;
+  --accent-hover: #5a67d8;
+  
+  /* Светлая тема (по умолчанию) */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f7fafc;
+  --bg-tertiary: #edf2f7;
+  
+  --text-primary: #2d3748;
+  --text-secondary: #718096;
+  
+  --border-color: #e2e8f0;
+  
+  --header-bg: rgba(255, 255, 255, 0.95);
+  --footer-bg: #2d3748;
+  --footer-text: #ffffff;
+  --footer-text-secondary: #a0aec0;
+  --footer-border: #4a5568;
+  
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+  --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.15);
+  
+  --border-radius: 8px;
+  --border-radius-lg: 12px;
+  
+  /* Скелетон */
+  --skeleton-bg: #edf2f7;
+  --skeleton-shine: #f7fafc;
+  
+  /* Ошибки */
+  --error-bg: #fed7d7;
+  --error-text: #c53030;
+  --error-border: #fc8181;
+}
+
+/* Темная тема */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-primary: #1a202c;
+    --bg-secondary: #2d3748;
+    --bg-tertiary: #4a5568;
+    
+    --text-primary: #f7fafc;
+    --text-secondary: #a0aec0;
+    
+    --border-color: #4a5568;
+    
+    --header-bg: rgba(26, 32, 44, 0.95);
+    --footer-bg: #0f141e;
+    --footer-text: #f7fafc;
+    --footer-text-secondary: #a0aec0;
+    --footer-border: #2d3748;
+    
+    --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+    --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.3);
+    --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.4);
+    
+    --skeleton-bg: #2d3748;
+    --skeleton-shine: #4a5568;
+    
+    --error-bg: rgba(197, 48, 48, 0.2);
+    --error-text: #fc8181;
+    --error-border: #c53030;
+  }
+}
+
+/* Кастомный скроллбар */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-secondary);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--accent-color);
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-hover);
+}
+
+/* Выделение текста */
+::selection {
+  background: var(--accent-color);
+  color: white;
+}
+
+::-moz-selection {
+  background: var(--accent-color);
+  color: white;
+}
